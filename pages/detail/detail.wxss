@@ -1,0 +1,96 @@
+/* pages/detail/detail.wxss */
+.details .book-detail{
+  padding: 20rpx 20rpx 40rpx 20rpx;
+  border-bottom: 4rpx solid #888;
+}
+.book-t{
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  color:#444;
+
+}
+.book-t .title{
+  font-size: 14px;
+  font-weight: 700;
+  color: #333;
+}
+.book-t image{
+  width:220rpx;
+  height:280rpx;
+}
+.book-t .main-msg{
+  margin-left: 40rpx;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.book-b{
+  display: flex;
+  justify-content: space-between;
+  margin-top: 50rpx;
+}
+.book-b .btn{
+  margin: 0;
+  width:300rpx;
+  font-size: 12px;
+  background:#ccc;
+  border:1px solid #ccc;
+}
+/* 简介样式 */
+.book-desc{
+  padding: 30rpx 20rpx;
+  font-size: 12px;
+  line-height: 1.5;
+  border-bottom:  2px solid #ccc;
+}
+.book-desc .title{
+  font-weight: 700;
+  font-size: 15px;
+}
+.book-desc .desc-main{
+  font-size: 12px;
+  color: #333;
+  margin-top:50rpx;
+}
+/* 查看目录 */
+.book-catalog{
+  padding: 0 20rpx;
+  line-height: 100rpx;
+  height: 100rpx;
+  display: flex;
+  justify-content: space-between;
+  border-bottom:2px solid #ccc;
+}
+.book-catalog .catalog-l{
+  width:300rpx;
+  display: flex;
+  justify-content: space-between;
+}
+.book-catalog .catalog-l title{
+  font-size: 15px;
+  font-weight: 700;
+  color: #333;
+}
+.catalogs{
+  font-size: 14px;
+  color:#444;
+}
+.update-time{
+  font-size: 14px;
+  color:#444;
+}
+.read-btn-wrap button{
+  position: fixed;
+  left:50%;
+  bottom: 10rpx;
+  transform: translateX(-50%);
+  width:600rpx;
+  height:48px;
+  line-height: 48px;
+  font-size: 16px;
+  background: skyblue;
+  color:#fff;
+  text-align: center;
+  border-radius: 10px;
+}

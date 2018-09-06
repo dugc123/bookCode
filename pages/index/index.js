@@ -1,45 +1,64 @@
-
-import {fetch} from '../../utils/util.js'
+import { fetch, login} from '../../utils/util.js'
 const app = getApp();
 Page({
-  /**
-   * 页面的初始数据
-   */
+  /** 页面的初始数据*/
   data: {
     swiperData: [],
     mainContent:[],
     indicatorDots: true,
     autoplay: true,
-    interval: 3000,
+    interval: 4000,
     duration: 1000,
-    isLoading: false
+    isLoading: false,
+    pn:1,
+    hasMore:true,//上拉是否有数据
+    loadDone:false
   },
-
   onLoad(){
-    this.getData()
-    this.getContent()
+    login()
+    Promise.all([this.getData(), this.getContent()]).then(() => {
+      this.setData({
+        hasMore: true,
+        pn: 1,
+        loadDone:true
+      })
+    })
   },
 
   // 轮播图数据
   getData() {
-    this.setData({
-      isLoading:true
-    })
-    fetch.get('/swiper').then(res=>{
+    return new Promise((resolve,reject)=>{
       this.setData({
-        swiperData: res.data,
-        isLoading: false
+        isLoading: true
       })
-    }).catch(err => {
-      isLoading: false
+      fetch.get('/swiper').then(res => {
+        resolve()
+        this.setData({
+          swiperData: res.data,
+          isLoading: false
+        })
+      }).catch(err => {
+        reject()
+        this.setData({
+          isLoading: false
+        })
+      })
     })
+ 
   },
-  //首页图书数据
+  //首页图书列表
   getContent(){
-    fetch.get('/category/books').then(res=>{
-      // console.log(res)
+    return new Promise((resolve,reject)=>{
       this.setData({
-        mainContent:res.data
+        isLoading: true
+      })
+      fetch.get('/category/books').then(res => {
+        resolve()
+        // console.log(res)
+        this.setData({
+          mainContent: res.data,
+          isLoading: false
+        })
       })
     })
   },
@@ -50,5 +69,42 @@ Page({
       url: `/pages/detail/detail?id=${id}`,
     })
   },
+  getMoreContent(){
+   return  new Promise(resolve=>{
+     fetch.get('/category/books',{pn:this.data.pn}).then(res => {
+       let newArr = [...this.data.mainContent, ...res.data]       
+       this.setData({
+         mainContent: newArr
+       })
+       resolve(res)               
+     })
+    })
+  },
+  //下拉加载
+  onPullDownRefresh(){
+      Promise.all([this.getData(),this.getContent()]).then(()=>{
+        this.setData({
+          hasMore:true,
+          pn:1
+        })
+        wx.stopPullDownRefresh();
+      })
+  },
+//上拉加载
+onReachBottom(){
+  if(this.data.hasMore){
+    this.setData({
+      pn:this.data.pn + 1
+    })
+    this.getMoreContent().then(res => {
+      if (res.data.length < 2) {
+        this.setData({
+          hasMore: false
+        })
+      }
+    })
+  }
+
+}
   
 })

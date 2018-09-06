@@ -1,4 +1,4 @@
-// pages/detail/detail.js
+ // pages/detail/detail.js
 import { fetch } from "../../utils/util.js"
 
 Page({
@@ -7,7 +7,8 @@ Page({
    */
   data: {
   bookId:"",
-  booKData:{}
+  booKData:{},
+  isLoading: false
   },
 
   /**
@@ -21,11 +22,17 @@ Page({
   this.getData()
   },
   getData(){
+    this.setData({
+      isLoading: true
+    })
     fetch.get(`/book/${this.data.bookId}`).then(res=>{
       console.log(res)
       this.setData({
-        bookData:res
+        bookData:res,
+        isLoading: false
       })
+    }).catch(err => {
+      isLoading: false
     })
   },
   //定义跳转的方法
@@ -33,6 +40,31 @@ Page({
     wx.navigateTo({
       url: `/pages/catalog/catalog?id=${this.data.bookId}`,
     })
+  },
+  //设置是否收藏方法
+  onColletionTap() {
+    fetch.post('/collection',{
+      bookId:this.data.bookId
+    }).then(res=>{
+      if(res.code == 200){
+        wx.showToast({
+          title: '收藏成功',
+          duration:1000
+        })
+        let bookData = {...this.data.bookData}
+        bookData.isCollect = 1;
+        this.setData({
+          bookData:bookData
+        })
+      }
+    })
+  },
+  onShareAppMessage(){
+    return{
+      title:this.data.bookData.data.title,
+      path:`/pages/detail/detail?id=${this.data.bookId}`,
+      imageUrl:this.data.bookData.data.img
+    }
   }
   
 })

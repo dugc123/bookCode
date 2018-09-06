@@ -53,3 +53,43 @@
 .many{
   margin-left: 20rpx
 }
+.loading-more{
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 140rpx;
+}
+.loading-more .loading-img{
+  width:50rpx;
+  height: 50rpx;
+}
+.loading-more text{
+  margin-left: 20rpx;
+}
+.no-more{
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 160rpx;
+  margin-top: 40rpx;
+  background: #f1f1f1;
+  color: #888;
+}
+.line{
+  position: absolute;
+  top:50%;
+  left: 50%;
+  transform: translate(-50%,-50%);
+  width:700rpx;
+  height: 1rpx;
+  background:#eee;
+  z-index: 0;
+}
+.no-more-text{
+  width:240rpx;
+  background: #f1f1f1;
+  position: relative;
+  z-index: 998;
+  text-align: center;
+}

@@ -1,16 +1,17 @@
 {
   "pages": [
     "pages/index/index",
+    "pages/study/study",    
+    "pages/user/user",    
     "pages/detail/detail",
     "pages/catalog/catalog",
     "pages/book/book",
-    "pages/user/user",
-    "pages/study/study"
+    "pages/collection/collection"
   ],
   "window": {
     "backgroundTextStyle": "light",
     "navigationBarBackgroundColor": "#fff",
-    "navigationBarTitleText": "云书",
+    "navigationBarTitleText": "口袋Bookshelf",
     "navigationBarTextStyle": "black"
   },
   "tabBar": {

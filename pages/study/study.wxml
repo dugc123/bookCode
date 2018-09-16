@@ -1,2 +1,40 @@
 <!--pages/study/study.wxml-->
-<text>pages/study/study.wxml</text>
+<wxs module="m1">
+  function format(ts) {
+    var d = getDate(ts)
+    return [d.getFullYear(), d.getMonth()+1>10?d.getMonth()+1:"0"+(d.getMonth()+1), d.getDate()>10?d.getDate():"0"+d.getDate()].join('-')
+      + ' '
+      + [d.getHours()>10?d.getHours():"0"+d.getHours(), d.getMinutes()>10?d.getMinutes():"0"+d.getMinutes(), d.getSeconds()>10? d.getSeconds():"0"+ d.getSeconds()].join(':')
+  }
+  module.exports.format = format
+</wxs>
+<image src='/static/img/loading.svg' class="loading" wx:if="{{isLoading}}"></image>
+<view wx:for="{{readList}}" class='readList' wx:key="{{index}}">
+
+  <view class='read-item'  >
+    <image src='{{item.book.img}}' class='readList-img'></image>
+    <view class='item-r'>
+     <text class='read-title'>{{item.book.title}}</text>
+     <view class='total'>书籍{{item.title.index+1}}/{{item.title.total}}章节</view>
+      <view class="progressShow">
+        <progress percent="{{item.p}}" show-info="true"/>
+      </view>
+      <view class="record">
+        <view class="record-left">
+          <text>上次查看：</text>
+          <text>第{{item.title.index+1}}章：</text>
+          <text>{{item.title.title}}</text>
+        </view>
+        <!-- {{item.updatedTime}} -->
+        <text class="record-right">{{m1.format(item.updatedTime)}}</text>
+      </view>
+    <view class='btn'>
+    <navigator url='/pages/book/book?id={{item.title._id}}&&bookId={{item.book._id}}&&bookIndex={{item.book.index}}'>
+        <button>继续阅读</button>
+    </navigator>
+    <button bindtap = "jumpBook" data-id="{{item.book._id}}">查看文档</button>
+    </view>
+    </view>
+  </view>
+</view>
+<text class='text-b' wx:if="{{showText}}">已加载全部</text>

@@ -1,2 +1,23 @@
-<!--pages/user/user.wxml-->
-<text>pages/user/user.wxml</text>
+
+<image src='/static/img/loading.svg' class="loading" wx:if="{{isLoading}}"></image>
+<view class='userinfo'>
+  <open-data type="userAvatarUrl" class="userinfo-avatar"></open-data>
+  <view class='userinfo-text'>
+    <open-data type="userNickName" class="userinfo-name"></open-data>
+    <text>这家伙很懒，什么也没留下</text>
+  </view>
+</view>
+  <view class='user-text'>
+      <view class='collection' bindtap='hadleCollection'>
+      <text style='padding-left:20rpx' >{{books.data}}<text wx:if="{{showText}}">-</text></text>
+      <text>收藏</text>
+    </view>
+    <view class='attention'>
+      <text style='padding-left:20rpx'>0</text>
+      <text>关注</text>
+    </view>
+  </view>
+
+<!-- 需要使用 button 来授权登录 -->
+<button wx:if="{{canIUse}}" open-type="getUserInfo" bindgetuserinfo="bindGetUserInfo" >授权登录</button>
+<image src='/static/img/logo.png'></image>

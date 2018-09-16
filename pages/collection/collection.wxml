@@ -1,0 +1,9 @@
+<!--pages/collection/collection.wxml-->
+<image src='/static/img/loading.svg' class="loading" wx:if="{{isLoading}}"></image>
+<view wx:for="{{books}}" class='collection' wx:key="{{index}}">
+  <view class='collection-item' bindtap = "jumpBook" data-id="{{item.book._id}}" bindlongpress="deleteCollection">
+    <image src='{{item.book.img}}' class='collection-img'></image>
+    <view class='title' class='collection-title'>{{item.book.title}}</view>
+  </view>
+</view>
+

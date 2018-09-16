@@ -54,7 +54,6 @@ Page({
       })
       fetch.get('/category/books').then(res => {
         resolve()
-        // console.log(res)
         this.setData({
           mainContent: res.data,
           isLoading: false
@@ -64,7 +63,7 @@ Page({
   },
   jumpBook(event){
     const id = event.currentTarget.dataset.id
-    console.log(id)
+    // console.log(id)
     wx.navigateTo({
       url: `/pages/detail/detail?id=${id}`,
     })

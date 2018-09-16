@@ -1,1 +1,62 @@
-/* pages/study/study.wxss */
+.readList {
+  padding: 12rpx; 
+}
+
+.readList-img {
+  width: 160rpx;
+  height: 220rpx;
+}
+
+.read-item {
+  display: flex;
+  margin: 12rpx;
+}
+
+.read-title {
+  margin-left: 12rpx;
+  font-size: 16px;
+  width:100%;
+}
+.btn{
+  display: flex;
+}
+ button {
+  display: flex;
+  font-size: 28rpx;
+  margin-left:40rpx;
+  width: 180rpx;
+  height: 60rpx;
+  
+  text-align: center;
+  color: #444;
+}
+
+progress{
+  margin-left: 8rpx
+}
+.total{
+  font-size: 16px;
+  color:#999;
+  margin: 8rpx;
+}
+.record{
+  display: flex;
+}
+.record-left{
+  font-size: 12px;
+    color:#999;
+    margin-left: 8rpx;
+    margin-bottom: 8rpx;
+}
+.record-right{
+    font-size: 12px;
+    color:#999;
+    margin-left: 8rpx;
+}
+.text-b{
+  display: flex;
+  justify-content: space-around;
+  color: #bbb;
+  font-size: 16px;
+  padding-bottom: 8px;
+}

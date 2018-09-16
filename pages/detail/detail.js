@@ -26,7 +26,6 @@ Page({
       isLoading: true
     })
     fetch.get(`/book/${this.data.bookId}`).then(res=>{
-      console.log(res)
       this.setData({
         bookData:res,
         isLoading: false
@@ -41,7 +40,7 @@ Page({
       url: `/pages/catalog/catalog?id=${this.data.bookId}`,
     })
   },
-  //设置是否收藏方法
+  //设置收藏方法
   onColletionTap() {
     fetch.post('/collection',{
       bookId:this.data.bookId
@@ -59,6 +58,7 @@ Page({
       }
     })
   },
+
   onShareAppMessage(){
     return{
       title:this.data.bookData.data.title,

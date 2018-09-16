@@ -1,0 +1,21 @@
+.collection{
+float: left;
+margin-top: 18rpx;
+}
+.collection-item{
+  width:350rpx;
+  height: 380rpx;
+  margin-left: 20rpx;
+  margin-top: 10rpx;
+  text-align: center;
+}
+.collection-img{
+  width:260rpx;
+  height: 300rpx; 
+}
+.collection-title{
+  margin-top: 12rpx;
+  font-size: 32rpx;
+  color: #555;
+  text-align: center;
+}

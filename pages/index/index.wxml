@@ -1,49 +1,60 @@
-<view>
-<view class="container index">
-<image src='/static/img/loading.svg' class="loading" wx:if="{{isLoading}}"></image>
-  <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
-    <block wx:for="{{swiperData}}" wx:key="{{index}}">
-      <swiper-item bindtap = "jumpBook" data-id="{{item.book._id}}">
-        <image src="{{item.img}}" class="slide-image" />
-      </swiper-item>
-    </block>
-  </swiper>
-  <view class='main-content'>
-    <view class='content-item' wx:for="{{mainContent}}" wx:key="{{index}}">
-      <view class='title'>
-        {{item.title}}
-      </view>
-      <view class='content' wx:for="{{item.books}}" wx:key="{{index}}"  wx:for-item="bookItem" bindtap = "jumpBook" data-id="{{bookItem._id}}">
-        <view class='box-l'>
-          <image src='{{bookItem.img}}' class='img'></image>
-        </view>
-        <view class='box-r'>
-          <view>
-            <view class='book-title'>{{bookItem.title}}</view>
-            <view class='book-desc'>{{bookItem.desc}}</view>
+
+<wxs module="m1">
+  function format(ts) {
+    var d = getDate(ts)
+    return [d.getFullYear(), d.getMonth()+1>10?d.getMonth()+1:"0"+(d.getMonth()+1), d.getDate()>10?d.getDate():"0"+d.getDate()].join('-')
+      + ' '
+      + [d.getHours()>10?d.getHours():"0"+d.getHours(), d.getMinutes()>10?d.getMinutes():"0"+d.getMinutes(), d.getSeconds()>10? d.getSeconds():"0"+ d.getSeconds()].join(':')
+  }
+  module.exports.format = format
+</wxs>
+ <view> 
+    <view class="container index">
+      <image src='/static/img/loading.svg' class="loading" wx:if="{{isLoading}}"></image>
+      <swiper indicator-dots="{{indicatorDots}}" autoplay="{{autoplay}}" interval="{{interval}}" duration="{{duration}}">
+        <block wx:for="{{swiperData}}" wx:key="{{index}}">
+          <swiper-item bindtap="jumpBook" data-id="{{item.book._id}}">
+            <image src="{{item.img}}" class="slide-image" />
+          </swiper-item>
+        </block>
+      </swiper>
+      <view class='main-content'>
+        <view class='content-item' wx:for="{{mainContent}}" wx:key="{{index}}">
+          <view class='title'>
+            {{item.title}}
           </view>
-          <view class='author'>
-            <text class='author-l'>{{bookItem.author}}</text>
-            <view class='author-r'>
-              <text class='update-time'>两天前</text>
-              <text class='category'>后端开发</text>
-              <text class='many'>{{bookItem.looknums}}人在看</text>
+          <view class='content' wx:for="{{item.books}}" wx:key="{{index}}" wx:for-item="bookItem" bindtap="jumpBook" data-id="{{bookItem._id}}">
+            <view class='box-l'>
+              <image src='{{bookItem.img}}' class='img'></image>
+            </view>
+            <view class='box-r'>
+              <view>
+                <view class='book-title'>{{bookItem.title}}</view>
+                <view class='book-desc'>{{bookItem.desc}}</view>
+              </view>
+              <view class='author'>
+                <text class='author-l'>{{bookItem.author}}</text>
+                <view class='author-r'>
+                  <text class='update-time'>{{m1.format(bookItem.updateTime)}}</text>
+                  <text class='category'>{{item.title}}</text>
+                  <text class='many'>{{bookItem.looknums}}人在看</text>
+                </view>
+              </view>
             </view>
           </view>
         </view>
       </view>
     </view>
-  </view>
-  </view>
-</view>
-  <!-- 上拉加载 -->
-  <view wx:if="{{loadDone}}">
-    <view class='loading-more' hidden="{{!hasMore}}">
-  <image src='/static/img/loadMore.svg' class='loading-img'></image>
-  <text>正在拼命加载中...</text>
-  </view>
-  <view class='no-more'  hidden="{{hasMore}}">
-  <text class='no-more-text'>我是有底线的</text>
-  <text class='line'></text>
-  </view>
-</view>
+    </view>
+    <!-- 上拉加载 -->
+    <view wx:if="{{loadDone}}">
+      <view class='loading-more' hidden="{{!hasMore}}">
+        <image src='/static/img/loadMore.svg' class='loading-img'></image>
+        <text>正在拼命加载中...</text>
+      </view>
+      <view class='no-more' hidden="{{hasMore}}">
+        <text class='no-more-text'>我是有底线的</text>
+        <text class='line'></text>
+      </view>
+    </view>
+    

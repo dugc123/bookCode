@@ -20,7 +20,7 @@
   height:280rpx;
 }
 .book-t .main-msg{
-  margin-left: 40rpx;
+  margin-left: 30rpx;
   display: flex;
   flex-direction: column;
   justify-content: space-between;
@@ -52,6 +52,10 @@
   font-size: 12px;
   color: #333;
   margin-top:50rpx;
+  display: -webkit-box;  
+  -webkit-box-orient: vertical;
+  -webkit-line-clamp:5;
+  overflow: hidden;
 }
 /* 查看目录 */
 .book-catalog{
